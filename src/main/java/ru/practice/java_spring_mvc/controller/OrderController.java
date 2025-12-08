@@ -3,6 +3,8 @@ package ru.practice.java_spring_mvc.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,18 +35,20 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @JsonView(Views.UserDetails.class)
-    public Order findById(@PathVariable Long id) {
-        return orderService.findById(id);
+    public ResponseEntity<Order> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.findById(id));
     }
 
     @PostMapping
     @JsonView(Views.UserDetails.class)
-    public Order create(@RequestBody @Valid OrderCreateDto dto) {
-        return orderService.create(dto);
+    public ResponseEntity<Order> create(@RequestBody @Valid OrderCreateDto dto) {
+        Order created = orderService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

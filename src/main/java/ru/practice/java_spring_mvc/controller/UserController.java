@@ -3,6 +3,7 @@ package ru.practice.java_spring_mvc.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,31 +38,32 @@ public class UserController {
 
     @GetMapping
     @JsonView(Views.UserSummary.class)
-    public List<User> findAll() {
-        return userService.findAll();
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/{id}")
     @JsonView(Views.UserDetails.class)
-    public User findById(@PathVariable Long id) {
-        return userService.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping
     @JsonView(Views.UserDetails.class)
-    public User create(@RequestBody @Valid UserCreateDto dto) {
-        return userService.create(dto);
+    public ResponseEntity<User> create(@RequestBody @Valid UserCreateDto dto) {
+        return ResponseEntity.ok(userService.create(dto));
     }
 
     @PutMapping("/{id}")
     @JsonView(Views.UserDetails.class)
-    public User update(@PathVariable Long id,
-                       @RequestBody @Valid UserUpdateDto dto) {
-        return userService.update(id, dto);
+    public ResponseEntity<User> update(@PathVariable Long id,
+                                       @RequestBody @Valid UserUpdateDto dto) {
+        return ResponseEntity.ok(userService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
