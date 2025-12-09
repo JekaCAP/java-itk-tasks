@@ -1,0 +1,30 @@
+package ru.practice.spring_mvc_library.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**
+ * Author
+ *
+ * @author agent
+ * @since 09.12.2025
+ */
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+}
