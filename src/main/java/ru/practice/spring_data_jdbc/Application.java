@@ -1,4 +1,4 @@
-package ru.practice.java_spring_mvc;
+package ru.practice.spring_data_jdbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Application
  *
  * @author agent
- * @since 08.12.2025
+ * @since 12.12.2025
  */
 @SpringBootApplication
 public class Application {
